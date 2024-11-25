@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Border.hpp"
+#include "Snake.hpp"
 
 class GameEngine {
     public: 
@@ -13,6 +14,7 @@ class GameEngine {
 
     private: 
         Border border;
+        Snake snake;
         sf::RenderWindow window;
         void processEvents();
         void update();

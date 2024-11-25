@@ -2,7 +2,8 @@
 
 GameEngine::GameEngine(): 
     window(sf::VideoMode(800, 600), "Game Engine"),
-    border(Border(500.f, 500.f, 50.f, 50.f)) {
+    border(Border(500.f, 500.f, 50.f, 50.f)),
+    snake(Snake(30.f, 30.f, 300.f, 300.f)) {
     window.setFramerateLimit(60);
     window.setPosition(sf::Vector2i(800, 200)); 
 
@@ -38,9 +39,10 @@ void GameEngine::render() {
 
     //Add drawing code here (draw objects)
     sf::RectangleShape borderShape = border.getShape();
-
+    sf::RectangleShape snakeSnape = snake.getSnakeShape();
 
     window.draw(borderShape);
+    window.draw(snakeSnape);
 
 
     window.display();
