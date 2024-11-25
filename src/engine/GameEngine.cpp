@@ -1,4 +1,5 @@
 #include "GameEngine.hpp"
+#include <iostream>
 
 GameEngine::GameEngine(): 
     window(sf::VideoMode(800, 600), "Game Engine"),
@@ -15,6 +16,7 @@ GameEngine::~GameEngine() {
 
 void GameEngine::startGame() {
     while (window.isOpen()) {
+        snake.move();
         processEvents();
         update();
         render();
@@ -27,6 +29,23 @@ void GameEngine::processEvents() {
         if (event.type == sf::Event::Closed) {
             window.close();
         }
+
+
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::Up) {
+                snake.setDirection(UP);
+                std::cout << "Up button pressed" << std::endl;
+            } else if (event.key.code == sf::Keyboard::Down) {
+                snake.setDirection(DOWN);
+                std::cout << "Down button pressed" << std::endl;
+            } else if (event.key.code == sf::Keyboard::Left) {
+                snake.setDirection(LEFT);
+                std::cout << "Left button pressed" << std::endl;
+            } else if (event.key.code == sf::Keyboard::Right) {
+                snake.setDirection(RIGHT);
+                std::cout << "Right button pressed" << std::endl;
+            }
+        } 
     }
 }
 

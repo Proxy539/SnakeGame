@@ -3,11 +3,17 @@
 
 #include <SFML/Graphics.hpp>
 
+enum SnakeDirection {
+    UP, DOWN, LEFT, RIGHT
+};
+
 class Snake {
     public: 
         Snake(double width, double height, double x, double y);
         ~Snake();
         sf::RectangleShape getSnakeShape();
+        void move();
+        void setDirection(SnakeDirection direction);
 
     private:
         sf::RectangleShape snakeShape;
@@ -15,6 +21,7 @@ class Snake {
         double y;
         double width;
         double height;
+        SnakeDirection direction;
 
 };
 
