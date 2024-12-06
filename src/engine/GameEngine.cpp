@@ -1,11 +1,12 @@
 #include "GameEngine.hpp"
 #include <iostream>
+#include <stdlib.h>
 
 GameEngine::GameEngine(): 
     window(sf::VideoMode(800, 600), "Game Engine"),
     border(Border(500.f, 500.f, 50.f, 50.f)),
-    snake(Snake(30.f, 30.f, 300.f, 300.f)) {
-    window.setFramerateLimit(5);
+    snake(Snake(30.f, 30.f, 300.f, 300.f)),
+    point(Point(30.f, 30.f)) {
     window.setPosition(sf::Vector2i(800, 200)); 
 
 }
@@ -16,8 +17,7 @@ GameEngine::~GameEngine() {
 
 void GameEngine::startGame() {
     showMenu();
-
-    std::cout << "Starting game" << std::endl;
+    processPoint();
     while (window.isOpen()) {
         processEvents();
         snake.move();
@@ -28,6 +28,7 @@ void GameEngine::startGame() {
 
 void GameEngine::processEvents() {
     sf::Event event;
+    window.setFramerateLimit(5);
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
             window.close();
@@ -36,16 +37,12 @@ void GameEngine::processEvents() {
         if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Up) {
                 snake.setDirection(UP);
-                std::cout << "Up button pressed" << std::endl;
             } else if (event.key.code == sf::Keyboard::Down) {
                 snake.setDirection(DOWN);
-                std::cout << "Down button pressed" << std::endl;
             } else if (event.key.code == sf::Keyboard::Left) {
                 snake.setDirection(LEFT);
-                std::cout << "Left button pressed" << std::endl;
             } else if (event.key.code == sf::Keyboard::Right) {
                 snake.setDirection(RIGHT);
-                std::cout << "Right button pressed" << std::endl;
             }
         } 
     }
@@ -61,10 +58,11 @@ void GameEngine::render() {
     //Add drawing code here (draw objects)
     sf::RectangleShape borderShape = border.getShape();
     sf::RectangleShape snakeSnape = snake.getSnakeShape();
+    sf::RectangleShape pointShape = point.getPointShape();
 
     window.draw(borderShape);
     window.draw(snakeSnape);
-
+    window.draw(pointShape);
 
     window.display();
 }
@@ -110,6 +108,7 @@ void GameEngine::showMenu() {
     window.draw(exitGameText);
     window.draw(snakeShape);
 
+    window.setFramerateLimit(60);
     window.display();
 
     sf::Text menuOptions[2] = { startGameText, exitGameText};
@@ -156,4 +155,16 @@ void GameEngine::showMenu() {
             window.display();
         }
     }
+}
+
+void GameEngine::processPoint() {
+    float borderX = border.getShape().getPosition().x;
+    int borderWidth = (int) border.getShape().getSize().x;
+    float borderY = border.getShape().getPosition().y;
+    int borderHeight = (int) border.getShape().getSize().y;
+
+    float pointx = borderX + (rand() % borderWidth);
+    float pointy = borderY + (rand() % borderHeight);
+
+    point.setPosition(pointx, pointy);
 }

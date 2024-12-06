@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Border.hpp"
 #include "Snake.hpp"
+#include "Point.hpp"
 
 class GameEngine {
     public: 
@@ -14,11 +15,13 @@ class GameEngine {
     private: 
         Border border;
         Snake snake;
+        Point point;
         sf::RenderWindow window;
         void processEvents();
         void update();
         void render();
         void showMenu();
+        void processPoint();
 };
 
 #endif
