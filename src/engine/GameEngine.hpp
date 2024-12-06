@@ -9,7 +9,6 @@ class GameEngine {
     public: 
         GameEngine();
         ~GameEngine();
-
         void startGame();
 
     private: 
@@ -19,6 +18,7 @@ class GameEngine {
         void processEvents();
         void update();
         void render();
+        void showMenu();
 };
 
 #endif

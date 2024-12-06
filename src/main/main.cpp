@@ -1,6 +1,5 @@
 #include "../engine/GameEngine.hpp"
 
-
 int main(void) {
 
     GameEngine engine;
