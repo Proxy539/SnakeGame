@@ -20,7 +20,8 @@ void GameEngine::startGame() {
     processPoint();
     while (window.isOpen()) {
         processEvents();
-        checkBordersCollisions();
+        checkBordersCollision();
+        checkPointCollision();
         snake.move();
         update();
         render();
@@ -170,7 +171,7 @@ void GameEngine::processPoint() {
     point.setPosition(pointx, pointy);
 }
 
-void GameEngine::checkBordersCollisions() {
+void GameEngine::checkBordersCollision() {
     
     float snakeX = snake.getSnakeShape().getPosition().x;
     float snakeWidth = snake.getSnakeShape().getSize().x;
@@ -206,4 +207,8 @@ void GameEngine::checkBordersCollisions() {
         exit(0);
     }
 
+}
+
+void GameEngine::checkPointCollision() {
+    //@TODO check if the snake collides the point and add the tail to the snake if it does
 }

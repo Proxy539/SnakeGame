@@ -22,7 +22,8 @@ class GameEngine {
         void render();
         void showMenu();
         void processPoint();
-        void checkBordersCollisions();
+        void checkBordersCollision();
+        void checkPointCollision();
 };
 
 #endif
