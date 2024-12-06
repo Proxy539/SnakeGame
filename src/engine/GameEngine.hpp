@@ -22,6 +22,7 @@ class GameEngine {
         void render();
         void showMenu();
         void processPoint();
+        void checkCollisions();
 };
 
 #endif

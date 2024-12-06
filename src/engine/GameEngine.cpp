@@ -20,6 +20,7 @@ void GameEngine::startGame() {
     processPoint();
     while (window.isOpen()) {
         processEvents();
+        checkCollisions();
         snake.move();
         update();
         render();
@@ -167,4 +168,42 @@ void GameEngine::processPoint() {
     float pointy = borderY + (rand() % borderHeight);
 
     point.setPosition(pointx, pointy);
+}
+
+void GameEngine::checkCollisions() {
+    
+    float snakeX = snake.getSnakeShape().getPosition().x;
+    float snakeWidth = snake.getSnakeShape().getSize().x;
+    float snakey = snake.getSnakeShape().getPosition().y;
+    float snakeHeight = snake.getSnakeShape().getSize().y;
+
+    float borderx = border.getShape().getPosition().x;
+    float borderWidth = border.getShape().getSize().x;
+    float bordery = border.getShape().getPosition().y;
+    float borderHeight = border.getShape().getSize().y;
+
+    if (snakeX + snakeWidth > border.getShape().getPosition().x + border.getShape().getSize().x) {
+        std::cout << "Snake colide with right border. Exit the game " << std::endl;
+        window.close();
+        exit(0);
+    } 
+
+    if (snakeX < border.getShape().getPosition().x) {
+        std::cout << "Snake colide with left border. Exit the game" << std::endl;
+        window.close();
+        exit(0);
+    }
+
+    if (snakey + snakeHeight > border.getShape().getPosition().y + border.getShape().getSize().y) {
+        std::cout << "Snake collide with buttom border. Exit the game" << std::endl;
+        window.close();
+        exit(0);
+    }
+
+    if (snakey < border.getShape().getPosition().y) {
+        std::cout << "Snake collide with top border. Exit the game" << std::endl;
+        window.close();
+        exit(0);
+    }
+
 }
