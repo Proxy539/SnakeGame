@@ -20,7 +20,7 @@ void GameEngine::startGame() {
     processPoint();
     while (window.isOpen()) {
         processEvents();
-        checkCollisions();
+        checkBordersCollisions();
         snake.move();
         update();
         render();
@@ -170,7 +170,7 @@ void GameEngine::processPoint() {
     point.setPosition(pointx, pointy);
 }
 
-void GameEngine::checkCollisions() {
+void GameEngine::checBorderskCollisions() {
     
     float snakeX = snake.getSnakeShape().getPosition().x;
     float snakeWidth = snake.getSnakeShape().getSize().x;
